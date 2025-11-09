@@ -12,7 +12,7 @@
       <div class="col-lg-6">
         <div class="ps-lg-5 text-center">
           <img loading="lazy" decoding="async"
-            src="images/about-us.png"
+            src="{{ asset('front//images/about-us.png') }}"
             alt="banner image" class="w-100">
         </div>
       </div>
@@ -87,16 +87,17 @@
         </a>
       </div> --}}
       @if ($services->isNotEmpty())
+      @php
+        $x = 1;
+      @endphp
+
         @foreach ($services as $service)
-          <div class="col-lg-4 col-md-6 service-item">
-            <a class="text-black" href="service-details.html">
-              <div class="block"> <span class="colored-box text-center h3 mb-4">{{ $loop->index + 1 }}</span>
-                <h3 class="mb-3 service-title">{{ $service->title }}</h3>
-                <p class="mb-0 service-description">{{ $service->short_desc }}</p>
-              </div>
-            </a>
-          </div>
+         <x-service-card :service="$service" :x="$x" />
+          @php
+              $x++; 
+          @endphp
         @endforeach
+
       @endif
     </div>
   </div>
