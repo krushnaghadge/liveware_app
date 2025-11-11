@@ -29,18 +29,18 @@ class MemberResource extends Resource
     {
         return $form
             ->schema([
-             TextInput::make('name')->required()->placeholder('Enter Name'),
-             TextInput::make('designation')->required()->placeholder('Enter Designation'),
-             TextInput::make('fb_url')->label('Facebook URL')->placeholder('Enter Facebook URL'),     
-                TextInput::make('tw_url')->label('Twitter URL')->placeholder('Enter Twitter URL'),
-                TextInput::make('in_url')->label('LinkedIn URL')->placeholder('Enter LinkedIn URL'),
+                TextInput::make('name')->required()->placeholder('Enter Name'),
+                TextInput::make('designation')->required()->placeholder('Enter Designation'),
+                TextInput::make('fb_url')->url()->label('Facebook URL')->placeholder('Enter Facebook URL'),
+                TextInput::make('tw_url')->url()->label('Twitter URL')->placeholder('Enter Twitter URL'),
+                TextInput::make('in_url')->url()->label('LinkedIn URL')->placeholder('Enter LinkedIn URL'),
                 FileUpload::make('image'),
-                 Select::make('status')
+                Select::make('status')
                     ->options([
                         '1' => 'Active',
                         '0' => 'Block',
                     ])->required(),
-                    
+
             ]);
     }
 
@@ -49,15 +49,15 @@ class MemberResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')->width(100),
-            TextColumn::make('name')->label('Name')->sortable()->searchable(),
-            TextColumn::make('designation')->label('Designation')->sortable()->searchable(),
-            
-            // Select::make('status')
-            //         ->options([
-            //             '1' => 'Active',
-            //             '0' => 'Block',
-            //         ])->required(),
-            
+                TextColumn::make('name')->label('Name')->sortable()->searchable(),
+                TextColumn::make('designation')->label('Designation')->sortable()->searchable(),
+
+                // Select::make('status')
+                //         ->options([
+                //             '1' => 'Active',
+                //             '0' => 'Block',
+                //         ])->required(),
+
             ])
             ->filters([
                 //

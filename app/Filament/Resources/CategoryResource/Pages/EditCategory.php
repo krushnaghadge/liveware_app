@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\MemberResource\Pages;
+namespace App\Filament\Resources\CategoryResource\Pages;
 
-use App\Filament\Resources\MemberResource;
+use App\Filament\Resources\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Notifications\Notification;
 
-class EditMember extends EditRecord
+class EditCategory extends EditRecord
 {
-    protected static string $resource = MemberResource::class;
+    protected static string $resource = CategoryResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -17,6 +17,7 @@ class EditMember extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
      protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
@@ -25,9 +26,9 @@ class EditMember extends EditRecord
      protected function getSaveNotification(): ?Notification
     {
         return Notification::make()
-            ->title('Member Updated Successfully')
+            ->title('Category Updated Successfully')
             ->success()        
-            ->body('The member has been updated successfully.');
+            ->body('The category has been updated successfully.');
 
     }
 }
