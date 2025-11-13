@@ -7,6 +7,9 @@ use App\Livewire\ShowService;
 use App\Livewire\ShowTeamPage;
 use App\Livewire\ShowBlog;
 use App\Livewire\BlogDetail;
+use App\Livewire\ShowFaqPage;
+use App\Livewire\ShowPage;
+use App\Livewire\ShowContactPage;
 
 
 /*
@@ -22,4 +25,6 @@ Route::get('/team',ShowTeamPage::class)->name('teamPage');
 
 Route::get('/blog',ShowBlog::class)->name('blog');  
 Route::get('/blogDetail/{id}',BlogDetail::class)->name('blogDetail');   
-// Route::get('/faq',ShowFAQ::class)->name('faq'); 
+Route::get('/faq',ShowFaqPage::class)->name('faq'); 
+Route::get('/page/{id}',ShowPage::class)->name('page'); 
+Route::get('/contact-page',ShowContactPage::class)->name('contactPage'); 

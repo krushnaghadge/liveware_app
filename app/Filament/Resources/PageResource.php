@@ -2,24 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FaqResource\Pages;
-use App\Filament\Resources\FaqResource\RelationManagers;
-use App\Models\Faq;
+use App\Filament\Resources\PageResource\Pages;
+use App\Filament\Resources\PageResource\RelationManagers;
+use App\Models\Page;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Symfony\Component\HttpFoundation\File\File;
+use Filament\Tables\Columns\ImageColumn;
 
-class FaqResource extends Resource
+class PageResource extends Resource
 {
-    protected static ?string $model = Faq::class;
+    protected static ?string $model = Page::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -28,16 +31,14 @@ class FaqResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('question')
-                    ->required()
-                    ->maxLength(255),
+                TextInput::make('title')->required(),
+                FileUpload::make('image')->nullable(),
+                RichEditor::make('content')->required()->columnSpan(2),
                 Select::make('status')
                     ->options([
                         '1' => 'Active',
                         '0' => 'Block',
                     ])->required(),
-                RichEditor::make('answer')->columnSpan(2)->required(),
-
             ]);
     }
 
@@ -46,9 +47,11 @@ class FaqResource extends Resource
         return $table
             ->columns([
                 //
+                
+                ImageColumn::make('image')->width(100),
+                TextColumn::make('title')->sortable()->searchable(),
+                
 
-                TextColumn::make('question')->label('Question')->sortable()->searchable(),
-                TextColumn::make('answer')->label('Answer')->sortable(),
             ])
             ->filters([
                 //
@@ -73,9 +76,9 @@ class FaqResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFaqs::route('/'),
-            'create' => Pages\CreateFaq::route('/create'),
-            'edit' => Pages\EditFaq::route('/{record}/edit'),
+            'index' => Pages\ListPages::route('/'),
+            'create' => Pages\CreatePage::route('/create'),
+            'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
     }
 }

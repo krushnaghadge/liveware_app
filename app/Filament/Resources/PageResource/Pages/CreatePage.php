@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\ArticleResource\Pages;
+namespace App\Filament\Resources\PageResource\Pages;
 
-use App\Filament\Resources\ArticleResource;
+use App\Filament\Resources\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
 
-class CreateArticle extends CreateRecord
+class CreatePage extends CreateRecord
 {
-    protected static string $resource = ArticleResource::class;
+    protected static string $resource = PageResource::class;
 
-    
-     protected function getRedirectUrl(): string
+
+
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
@@ -21,8 +22,7 @@ class CreateArticle extends CreateRecord
     {
         return Notification::make()
             ->title('Article Created Successfully')
-            ->success()        
+            ->success()
             ->body('The article has been created successfully.');
-
     }
 }
